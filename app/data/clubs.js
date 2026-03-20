@@ -26,7 +26,7 @@ export const clubs = [
     },
     visualTheme: 'mosaic',
     shoeImage: '/images/shoes/shoes1 barcelona.png',
-     bgImage: '/BACKGROUND/FC Barcelona.jpg',
+     bgImage: '/BACKGROUND/Fc Barcelona.jpg',
     price: '$299',
   },
   {
@@ -56,7 +56,7 @@ export const clubs = [
     },
     visualTheme: 'crown',
     shoeImage: '/images/shoes/shoes2 real madrid.png',
-     bgImage: '/BACKGROUND/Real Madrid.jpg',
+     bgImage: '/BACKGROUND/Real madrid.jpg',
     price: '$299',
   },
   
