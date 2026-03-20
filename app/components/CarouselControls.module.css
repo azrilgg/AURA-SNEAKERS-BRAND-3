@@ -172,7 +172,8 @@
   .prevBtn { left: 10px; }
   .nextBtn { right: 10px; }
   
-  .bottomDock { padding: 0 10px; bottom: clamp(10px, 3vh, 24px); }
+  /* Hide the carousel navbar entirely on mobile */
+  .bottomDock { display: none; }
   .dockInner { gap: 16px; padding: 10px 16px; width: 100%; justify-content: center; }
   .counter { display: none; }
   .orderBtn { padding: 8px 16px; font-size: 10px; }
