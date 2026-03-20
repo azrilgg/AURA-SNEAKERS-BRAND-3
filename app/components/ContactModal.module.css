@@ -1,0 +1,299 @@
+/* =========================================
+   CONTACT MODAL STYLES (GOD TIER)
+   ========================================= */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #050505;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 50px;
+  transform: translateY(40px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.8), inset 0 0 80px rgba(255,255,255,0.02);
+}
+
+.overlay.visible .modal {
+  transform: translateY(0) scale(1);
+}
+
+.modal::-webkit-scrollbar { width: 6px; }
+.modal::-webkit-scrollbar-track { background: transparent; }
+.modal::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+
+.closeBtn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+}
+
+.closeBtn:hover {
+  background: var(--club-primary);
+  color: #000;
+  transform: rotate(90deg) scale(1.1);
+  border-color: var(--club-primary);
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--club-primary);
+  margin-bottom: 12px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 40px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Form Container */
+.formContainer {
+  transition: opacity 0.5s ease;
+}
+
+.isSending {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputGroup {
+  position: relative;
+  width: 100%;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.input, .textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  border-radius: 12px;
+  padding: 18px 20px 18px 50px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.input:focus, .textarea:focus {
+  background: rgba(255,255,255,0.05);
+  border-color: var(--club-primary);
+  box-shadow: 0 0 15px rgba(var(--glow-rgb), 0.2);
+}
+
+.input:focus + .inputIcon, 
+.textarea:focus + .inputIcon {
+  color: var(--club-primary);
+}
+
+.submitBtn {
+  margin-top: 10px;
+  background: var(--club-primary);
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  padding: 18px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.submitBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px rgba(var(--glow-rgb), 0.4);
+}
+
+.sendingText {
+  animation: pulse 1s infinite alternate;
+}
+
+/* Success Animation */
+.successContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 0;
+  animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.successIconWrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.checkIcon {
+  position: relative;
+  z-index: 2;
+  animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards;
+  opacity: 0;
+  transform: scale(0);
+}
+
+.pulseRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--club-primary);
+  opacity: 0;
+  animation: ripple 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.doneBtn {
+  margin-top: 30px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 30px;
+  padding: 12px 30px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.doneBtn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: #fff;
+}
+
+/* Keyframes */
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0) rotate(-45deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes ripple {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes pulse {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+/* ===== TABLET GOD-TIER ===== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .overlay { padding: 30px; }
+  .modal { padding: 44px 36px; max-width: 560px; }
+  .title { font-size: 34px; }
+  .input, .textarea { padding: 16px 18px 16px 48px; font-size: 14px; }
+  .submitBtn { padding: 16px; font-size: 13px; }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .overlay { padding: 16px; }
+  .modal { padding: 30px 20px; border-radius: 16px; }
+  .closeBtn { top: 16px; right: 16px; width: 32px; height: 32px; }
+  .title { font-size: 28px; }
+  .input, .textarea { padding: 14px 16px 14px 40px; font-size: 13px; }
+  .inputIcon { left: 16px; }
+  .submitBtn { padding: 14px; font-size: 12px; }
+}

@@ -1,0 +1,323 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at 30% 50%,
+    rgba(255, 255, 255, 0.02) 0%,
+    transparent 50%
+  );
+  animation: grain 8s steps(10) infinite;
+  pointer-events: none;
+}
+
+.heroInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--container-max);
+  padding: 0 60px;
+  gap: 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.heroLeft {
+  flex: 1;
+  max-width: 600px;
+}
+
+.heroTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border: 1px solid var(--border-light);
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.2s forwards;
+}
+
+.heroTagDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--club-primary);
+  animation: glowPulse 2s ease infinite;
+  --glow-rgb: 255, 255, 255;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 700;
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.4s forwards;
+}
+
+.heroTitleLine {
+  display: block;
+  overflow: hidden;
+}
+
+.heroTitleAccent {
+  background: linear-gradient(135deg, var(--club-primary), var(--club-secondary, #fff));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 480px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.6s forwards;
+}
+
+.heroCTA {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.8s forwards;
+}
+
+.ctaButton {
+  padding: 16px 40px;
+  border: none;
+  border-radius: 0;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaPrimary {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.ctaPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(255, 255, 255, 0.15);
+}
+
+.ctaSecondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+}
+
+.ctaSecondary:hover {
+  border-color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.heroRight {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 500px;
+}
+
+.shoeContainer {
+  position: relative;
+  width: 100%;
+  max-width: 550px;
+  opacity: 0;
+  animation: rotateIn 1s ease 0.5s forwards;
+}
+
+.shoeImage {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5));
+  animation: float 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.shoeShadow {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 20px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.3) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: floatShadow 6s ease-in-out infinite;
+}
+
+.shoeGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(var(--glow-rgb, 255, 255, 255), 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 1.2s forwards;
+}
+
+.scrollText {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.scrollLine {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--text-muted), transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollLine::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: var(--text-primary);
+  animation: scrollDown 2s ease infinite;
+}
+
+@keyframes scrollDown {
+  0% { top: -50%; }
+  100% { top: 100%; }
+}
+
+/* Marquee */
+.marqueeWrapper {
+  position: absolute;
+  bottom: 100px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.marqueeText {
+  font-family: var(--font-display);
+  font-size: clamp(80px, 12vw, 200px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 20px;
+  white-space: nowrap;
+  padding-right: 80px;
+  color: var(--text-primary);
+}
+
+@media (max-width: 992px) {
+  .heroInner {
+    flex-direction: column;
+    text-align: center;
+    padding: 120px 30px 60px;
+    gap: 40px;
+  }
+  .heroLeft {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .heroSubtitle {
+    max-width: 100%;
+  }
+  .heroRight {
+    min-height: 300px;
+  }
+  .shoeContainer {
+    max-width: 350px;
+  }
+  .heroCTA {
+    flex-direction: column;
+    width: 100%;
+  }
+  .ctaButton {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    letter-spacing: -1px;
+  }
+  .heroTag {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+}

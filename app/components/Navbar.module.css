@@ -1,0 +1,101 @@
+/* =========================================
+   NAVBAR (NO SCROLL EDITION)
+   ========================================= */
+
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 30px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.brandImg {
+  height: clamp(30px, 4vw, 50px);
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255,255,255,0.2));
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.detailsNavBtn {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 10px;
+}
+
+.detailsNavBtn:hover {
+  color: var(--text-primary);
+  text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.orderNavBtn {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 10px 24px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(10px);
+}
+
+.orderNavBtn:hover {
+  background: var(--club-primary);
+  color: #000;
+  border-color: var(--club-primary);
+  box-shadow: 0 0 20px rgba(var(--glow-rgb), 0.3);
+}
+
+/* ===== TABLET GOD-TIER ===== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .navbar { padding: 24px 40px; }
+  .brandImg { height: clamp(32px, 4.5vw, 44px); }
+  .navRight { gap: 12px; }
+  .detailsNavBtn { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  .orderNavBtn { padding: 10px 20px; font-size: 12px; letter-spacing: 1.5px; }
+}
+
+@media (max-width: 767px) {
+  .navbar { padding: 20px 30px; }
+  .logoText { font-size: 18px; letter-spacing: 2px; }
+  .logoIcon { width: 32px; height: 32px; font-size: 12px; }
+  
+  .navRight { gap: 8px; }
+  .detailsNavBtn { padding: 8px; font-size: 11px; }
+  .orderNavBtn { padding: 8px 16px; font-size: 11px; }
+}
+
+@media (max-width: 480px) {
+  .navbar { padding: 20px; }
+}

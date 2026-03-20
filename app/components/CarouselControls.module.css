@@ -1,0 +1,185 @@
+/* =========================================
+   CAROUSEL CONTROLS STYLES
+   ========================================= */
+
+/* === Side Arrows === */
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 50;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.prevBtn { left: 40px; }
+.nextBtn { right: 40px; }
+
+.navBtn:hover {
+  background: rgba(var(--glow-rgb), 0.15);
+  border-color: rgba(var(--glow-rgb), 0.4);
+  color: var(--club-primary);
+  box-shadow: 0 0 20px rgba(var(--glow-rgb), 0.2);
+}
+
+.prevBtn:hover { transform: translateY(-50%) translateX(-4px); }
+.nextBtn:hover { transform: translateY(-50%) translateX(4px); }
+
+/* === Bottom Dock === */
+.bottomDock {
+  position: absolute;
+  bottom: clamp(10px, 4vh, 40px);
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 50;
+  padding: 0 40px;
+}
+
+.dockInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 12px 24px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.05); /* very subtle */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle progress bar line across the top of the dock */
+.dockInner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: var(--progress);
+  background: var(--club-primary, #fff);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 10px var(--club-primary, #fff);
+}
+
+/* Counter */
+.counter {
+  transition: color 0.5s ease;
+}
+
+.divider {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.totalNum {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Dots */
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dot {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.dotInner {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dot:hover .dotInner {
+  background: rgba(255,255,255,0.5);
+  transform: scale(1.5);
+}
+
+.dot.active .dotInner {
+  background: var(--club-primary);
+  width: 24px;
+  border-radius: 100px;
+  box-shadow: 0 0 10px rgba(var(--glow-rgb), 0.5);
+}
+
+/* Order Button */
+.orderBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 100px;
+  background: var(--club-primary);
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px rgba(var(--glow-rgb), 0.3);
+}
+
+.orderBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(var(--glow-rgb), 0.6);
+  background: #fff;
+}
+
+/* ===== TABLET GOD-TIER ===== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .navBtn { width: 50px; height: 50px; }
+  .prevBtn { left: 24px; }
+  .nextBtn { right: 24px; }
+  .bottomDock { padding: 0 30px; }
+  .dockInner { gap: 28px; padding: 12px 20px; }
+  .orderBtn { padding: 10px 20px; font-size: 11px; letter-spacing: 1.5px; }
+}
+
+@media (max-width: 767px) {
+  .navBtn { width: 40px; height: 40px; }
+  .prevBtn { left: 10px; }
+  .nextBtn { right: 10px; }
+  
+  .bottomDock { padding: 0 10px; bottom: clamp(10px, 3vh, 24px); }
+  .dockInner { gap: 16px; padding: 10px 16px; width: 100%; justify-content: center; }
+  .counter { display: none; }
+  .orderBtn { padding: 8px 16px; font-size: 10px; }
+  .orderBtn svg { display: none; }
+}
+
+@media (max-height: 600px) {
+  .bottomDock { bottom: 10px; }
+  .navBtn { width: 40px; height: 40px; }
+}

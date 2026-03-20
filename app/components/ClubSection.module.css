@@ -1,0 +1,461 @@
+/* ============================================
+   CLUB SECTION — Alternating Left/Right Layout
+   ============================================ */
+
+.section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 0 40px;
+  overflow: hidden;
+}
+
+/* === Ambient Background === */
+.ambientBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+}
+.ambientBg.show { opacity: 1; }
+
+.ambientGlow {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+}
+
+/* === Layout === */
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 60px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.inner.reverse {
+  flex-direction: row-reverse;
+}
+
+/* === CONTENT SIDE === */
+.content {
+  flex: 1;
+  min-width: 0;
+  max-width: 600px;
+}
+
+.edition {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 18px 6px 6px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--club-primary);
+  margin-bottom: 20px;
+}
+
+.editionDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.clubName {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 5.5vw, 80px);
+  font-weight: 700;
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+
+.motto {
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 2vw, 22px);
+  font-style: italic;
+  color: var(--club-primary);
+  margin-bottom: 24px;
+  opacity: 0.9;
+}
+
+/* History */
+.historyBlock {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.historyTitle {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.historyText {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+.historyText:last-child { margin-bottom: 0; }
+
+/* Highlight Tags */
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.tag {
+  padding: 5px 14px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+.tag:hover {
+  border-color: var(--club-primary);
+  color: var(--club-primary);
+  background: rgba(255,255,255,0.06);
+}
+
+/* Stats */
+.stats {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 28px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.statVal {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.statLabel {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Players */
+.players {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 20px;
+}
+
+.playersLabel {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.playerRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.playerChip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.playerChip:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(var(--chip-glow), 0.3);
+  box-shadow: 0 0 20px rgba(var(--chip-glow), 0.06);
+  transform: translateX(4px);
+}
+
+.playerAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(var(--chip-glow),0.12), rgba(var(--chip-glow),0.04));
+  border: 1px solid rgba(var(--chip-glow),0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.playerChip:hover .playerAvatar {
+  border-color: rgba(var(--chip-glow),0.5);
+  box-shadow: 0 0 16px rgba(var(--chip-glow),0.2);
+}
+
+.playerInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.playerName {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playerMeta {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* === SHOE SIDE === */
+.shoeSide {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 450px;
+}
+
+.shoeWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: perspective(1200px) rotateY(-12deg) scale(0.9) translateX(40px);
+  transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
+}
+
+.inner.reverse .shoeWrapper {
+  transform: perspective(1200px) rotateY(12deg) scale(0.9) translateX(-40px);
+}
+
+.shoeWrapper.shoeIn {
+  opacity: 1;
+  transform: perspective(1200px) rotateY(0deg) scale(1) translateX(0);
+}
+
+.glowRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  transition: all 1s ease;
+}
+
+.shoeFloat {
+  animation: float 6s ease-in-out infinite;
+}
+
+.shoeImg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5));
+  transition: filter 0.5s ease;
+}
+
+.shoeWrapper:hover .shoeImg {
+  filter: drop-shadow(0 40px 80px rgba(0,0,0,0.6)) brightness(1.05);
+}
+
+.shoeShadow {
+  width: 60%;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, transparent 70%);
+  margin-top: -10px;
+  animation: floatShadow 6s ease-in-out infinite;
+}
+
+.priceTag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 12px 18px;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  z-index: 2;
+}
+
+.priceLabel {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.priceValue {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.shoeEdition {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* === Animation helpers === */
+.animIn {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.edition,
+.clubName,
+.motto,
+.historyBlock,
+.highlights,
+.stats,
+.players {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* === Divider === */
+.divider {
+  width: 100%;
+  max-width: 1200px;
+  height: 1px;
+  margin: 60px auto 0;
+  background: linear-gradient(90deg, transparent 0%, var(--border-light) 20%, var(--border-light) 80%, transparent 100%);
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 1100px) {
+  .inner,
+  .inner.reverse {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+    padding: 0 30px;
+  }
+
+  .content {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .highlights { justify-content: center; }
+  .stats { justify-content: center; }
+
+  .playerRow {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .playerChip:hover { transform: translateX(0) translateY(-2px); }
+
+  .shoeWrapper {
+    max-width: 360px;
+    transform: perspective(1200px) rotateY(0deg) scale(0.85) translateY(20px) !important;
+  }
+  .shoeWrapper.shoeIn {
+    transform: perspective(1200px) rotateY(0deg) scale(1) translateY(0) !important;
+  }
+
+  .shoeSide { min-height: 300px; }
+}
+
+@media (max-width: 600px) {
+  .section { padding: 60px 0 20px; }
+  .inner { padding: 0 20px; }
+  .clubName { letter-spacing: -1px; }
+
+  .stats { gap: 20px; }
+  .statVal { font-size: 26px; }
+
+  .playerRow { grid-template-columns: 1fr; }
+
+  .shoeWrapper { max-width: 280px; }
+  .glowRing { width: 250px; height: 250px; }
+}

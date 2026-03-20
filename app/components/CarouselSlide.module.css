@@ -1,0 +1,739 @@
+/* =========================================
+   CAROUSEL SLIDE — HORIZONTAL SCROLL GOD TIER
+   ========================================= */
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+  z-index: 1;
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+
+/* === Pure Horizontal States === */
+.active {
+  opacity: 1;
+  z-index: 10;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.prev {
+  opacity: 0;
+  z-index: 5;
+  transform: translateX(-100vw);
+  pointer-events: none;
+}
+
+.next {
+  opacity: 0;
+  z-index: 5;
+  transform: translateX(100vw);
+  pointer-events: none;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+/* === Custom Background Environment === */
+.bgContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.bgImage {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 8s ease-out;
+  transform: scale(1.1);
+}
+
+.active .bgImage {
+  transform: scale(1.0);
+  /* Subtle Ken Burns focus effect */
+}
+
+/* God Tier Gradient Overlay for pristine text legibility */
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+      rgba(5, 5, 5, 0.95) 0%,
+      rgba(5, 5, 5, 0.75) 45%,
+      rgba(5, 5, 5, 0.2) 100%);
+  z-index: 1;
+}
+
+/* === Background Watermark Typography === */
+.bgWatermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: 28vw;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.02);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+  line-height: 0.8;
+  letter-spacing: -1vw;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prev .bgWatermark {
+  transform: translate(-80%, -50%);
+}
+
+.next .bgWatermark {
+  transform: translate(-20%, -50%);
+}
+
+/* === Layout === */
+.slideInner {
+  width: 100%;
+  max-width: 1800px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6vw;
+  position: relative;
+  z-index: 2;
+}
+
+/* === LEFT: EDITORIAL TYPOGRAPHY === */
+.infoSide {
+  flex: 1;
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Text stays mostly fixed inside the slide, but the whole slide translates */
+}
+
+/* Staggered Horizontal Animations for Content entering */
+.active .metaTop,
+.active .titleLine,
+.active .mottoWrapper,
+.active .editorialGrid {
+  animation: slideInRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.active .metaTop {
+  animation-delay: 0.2s;
+}
+
+.active .titleLine:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.active .titleLine:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.active .mottoWrapper {
+  animation-delay: 0.5s;
+}
+
+.active .editorialGrid {
+  animation-delay: 0.6s;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Labels */
+.labelSmall {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 8px;
+}
+
+.metaTop {
+  margin-bottom: 2vh;
+}
+
+.editionText {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+/* Main Title */
+.clubName {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.9;
+  margin-bottom: 4vh;
+}
+
+.titleLine {
+  display: block;
+  overflow: hidden;
+}
+
+.titleSerif {
+  font-family: var(--font-serif);
+  font-size: clamp(50px, 7vw, 120px);
+  font-weight: 400;
+  letter-spacing: -2px;
+  color: var(--text-primary);
+  display: block;
+  text-shadow: 0 0 60px rgba(var(--glow-rgb), 0.15);
+}
+
+.titleSans {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 90px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--text-primary);
+  display: block;
+  margin-left: 10%;
+  filter: drop-shadow(0 0 30px rgba(var(--glow-rgb), 0.1));
+}
+
+/* Motto */
+.mottoWrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 5vh;
+  padding-left: 4px;
+}
+
+.mottoQuote {
+  font-family: var(--font-serif);
+  font-size: 60px;
+  line-height: 0.6;
+  color: var(--club-primary);
+  opacity: 0.5;
+}
+
+.motto {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1vw, 16px);
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  max-width: 400px;
+  line-height: 1.6;
+  padding-top: 8px;
+}
+
+/* Editorial Grid Layout */
+.editorialGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 4vh;
+}
+
+.historyText {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-weight: 300;
+  padding-right: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.playerList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.playerItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.playerName {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.playerPos {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--club-primary);
+  opacity: 0.8;
+}
+
+/* === RIGHT: VISUAL SIDE === */
+.visualSide {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+}
+
+/* Shoe Entrance Animation from Right/Left */
+.shoeWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 850px;
+  opacity: 0;
+  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prev .shoeWrapper {
+  transform: perspective(1000px) rotateY(-15deg) scale(0.9) translateX(-100px);
+}
+
+.next .shoeWrapper {
+  transform: perspective(1000px) rotateY(15deg) scale(0.9) translateX(100px);
+}
+
+.active .shoeWrapper {
+  transform: perspective(1000px) rotateY(0deg) scale(1) translateX(0);
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.shoeGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  animation: pulseGlow 4s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+.shoeFloat {
+  position: relative;
+  z-index: 2;
+  animation: float 8s ease-in-out infinite;
+}
+
+.shoeImg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.6));
+  transition: filter 0.5s ease;
+}
+
+.shoeWrapper:hover .shoeImg {
+  filter: drop-shadow(0 60px 100px rgba(0, 0, 0, 0.8)) brightness(1.1);
+}
+
+.shoeShadow {
+  position: absolute;
+  bottom: -4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 24px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: floatShadow 8s ease-in-out infinite;
+}
+
+/* Price Tag (GOD TIER FROSTED PILL) */
+.priceTag {
+  position: absolute;
+  bottom: 15vh;
+  right: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.priceLabel {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.priceValue {
+  font-family: var(--font-serif);
+  font-size: 48px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(var(--glow-rgb), 0.6);
+}
+
+/* === RESPONSIVE ALL DEVICES === */
+
+/* === RESPONSIVE ALL DEVICES === */
+
+/* Large Desktop */
+@media (max-width: 1400px) {
+  .slideInner {
+    padding: 0 60px;
+    gap: 40px;
+  }
+
+  .titleSans {
+    margin-left: 0;
+  }
+
+  .editorialGrid {
+    gap: 30px;
+  }
+
+  .shoeWrapper {
+    max-width: 650px;
+  }
+}
+
+/* ===== TABLET GOD-TIER (Portrait & Landscape) ===== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .bgOverlay {
+    background: linear-gradient(
+      180deg, 
+      rgba(5, 5, 5, 0.92) 0%, 
+      rgba(5, 5, 5, 0.5) 40%, 
+      rgba(5, 5, 5, 0.85) 100%
+    );
+  }
+
+  .slideInner {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 50px 80px;
+    gap: 2vh;
+    text-align: center;
+  }
+
+  .infoSide { 
+    max-width: 90%;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    flex: 0 0 auto;
+  }
+  
+  .clubName { 
+    flex-direction: row; 
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 2vh;
+  }
+  
+  .titleSerif { font-size: clamp(42px, 5.5vw, 58px); letter-spacing: -1px; }
+  .titleSans { 
+    font-size: clamp(36px, 4.8vw, 50px); 
+    margin-left: 0; 
+    -webkit-text-stroke: 1.2px var(--text-primary);
+  }
+  
+  .mottoWrapper { 
+    justify-content: center; 
+    margin-bottom: 2vh;
+  }
+  .mottoQuote { font-size: 32px; }
+  .motto { font-size: 14px; text-align: center; }
+  
+  .metaTop { margin-bottom: 1vh; }
+  .editionText { font-size: 15px; }
+  .labelSmall { font-size: 10px; letter-spacing: 3px; }
+  
+  .editorialGrid { 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px; 
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 2vh;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 0;
+  }
+  
+  .historyText { 
+    padding-right: 0; 
+    font-size: 14px; 
+    line-height: 1.7;
+    -webkit-line-clamp: 3; 
+    line-clamp: 3;
+    text-align: center;
+  }
+  .playerList { flex-direction: row; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .playerName { font-size: 14px; }
+  .playerPos { font-size: 11px; }
+  
+  .bgWatermark { font-size: 26vw; top: 38%; opacity: 0.015; }
+  
+  /* CENTERED SHOE */
+  .visualSide {
+    position: relative;
+    width: 100%;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  }
+  
+  .shoeWrapper { 
+    max-width: 480px;
+    transform-origin: center center;
+  }
+  .active .shoeWrapper { 
+    transform: perspective(1000px) rotateY(0deg) scale(1) translateX(0); 
+  }
+  .shoeGlow { width: 380px; height: 380px; }
+  
+  /* CENTERED PRICE */
+  .priceTag { 
+    position: absolute;
+    bottom: 3vh;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    align-items: center;
+    padding: 10px 28px;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .priceValue { font-size: 36px; }
+  .priceLabel { font-size: 11px; letter-spacing: 2px; }
+}
+
+/* ===== TABLET PORTRAIT SMALL (768px - 834px) ===== */
+@media (min-width: 768px) and (max-width: 834px) {
+  .slideInner { padding: 90px 30px 70px; }
+  .titleSerif { font-size: clamp(36px, 5vw, 48px); }
+  .titleSans { font-size: clamp(30px, 4.2vw, 42px); }
+  .editorialGrid { max-width: 100%; }
+  .shoeWrapper { max-width: 350px; }
+  .priceValue { font-size: 32px; }
+  .mottoQuote { font-size: 28px; }
+}
+
+/* ===== MOBILE (Phones & Small Screens) ===== */
+@media (max-width: 767px) {
+  .bgOverlay {
+    background: linear-gradient(
+      180deg, 
+      rgba(5, 5, 5, 0.95) 0%, 
+      rgba(5, 5, 5, 0.3) 50%,
+      rgba(5, 5, 5, 0.95) 100%
+    );
+  }
+
+  .slideInner { 
+    flex-direction: column; 
+    padding: 80px 20px 80px; 
+    gap: 2vh; 
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+  }
+  
+  .infoSide { 
+    width: 100%; 
+    margin-top: 0;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    order: 1;
+  }
+  
+  .visualSide {
+    position: relative;
+    width: 100%;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    order: 2;
+    min-height: 25vh;
+  }
+  
+  .editorialGrid { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 1.5vh; 
+    width: 100%; 
+    order: 3;
+    align-items: center;
+    margin-top: 2vh;
+  }
+  
+  .clubName { gap: 6px; justify-content: center; margin-bottom: 1.5vh; flex-direction: row; flex-wrap: wrap; }
+  .titleSerif { font-size: clamp(32px, 5vh, 48px); line-height: 1; }
+  .titleSans { font-size: clamp(28px, 4.5vh, 40px); line-height: 1; margin-left: 0; -webkit-text-stroke: 1px var(--text-primary); }
+
+  .mottoWrapper { justify-content: center; gap: 8px; margin-bottom: 0; }
+  .mottoQuote { font-size: clamp(24px, 4vh, 32px); }
+  .motto { font-size: clamp(12px, 1.8vh, 14px); text-align: center; }
+  
+  .labelSmall { margin-bottom: 2px; font-size: 10px; letter-spacing: 2px; }
+  .historyText { 
+    font-size: clamp(12px, 1.8vh, 14px); 
+    line-height: 1.5;
+    -webkit-line-clamp: 3; 
+    line-clamp: 3; 
+    text-align: center;
+    padding-right: 0;
+  }
+  .playerList { justify-content: center; gap: 10px; flex-direction: row; flex-wrap: wrap; }
+  .playerName { font-size: 13px; font-weight: 600; }
+  
+  .shoeWrapper { 
+    max-width: 85vw; 
+    transform-origin: center; 
+  }
+  .active .shoeWrapper { transform: perspective(1000px) rotateY(0deg) scale(0.95); }
+  
+  .priceTag { 
+    position: absolute;
+    bottom: 5vh;
+    right: 50%;
+    transform: translateX(50%);
+    align-items: center;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .priceValue { font-size: clamp(24px, 4vh, 32px); font-weight: 600; text-shadow: 0 0 10px rgba(var(--glow-rgb), 0.5); }
+  .priceLabel { font-size: 10px; letter-spacing: 3px; color: var(--text-secondary); }
+}
+
+/* Handle Short Heights (Landscape mobile) */
+@media (max-height: 600px) {
+  .slideInner {
+    flex-direction: row;
+    padding: 60px 20px 20px;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .infoSide {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    order: 1;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .visualSide {
+    width: 50%;
+    align-items: center;
+    order: 2;
+  }
+
+  .clubName {
+    justify-content: flex-start;
+  }
+
+  .editorialGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    order: 3;
+    margin-top: 10px;
+    justify-items: flex-start;
+  }
+
+  .historyText {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    font-size: 12px;
+    text-align: left;
+  }
+
+  .mottoWrapper {
+    display: none;
+  }
+
+  .shoeWrapper {
+    max-width: 40vw;
+  }
+
+  .priceTag {
+    right: 20px;
+    bottom: 20px;
+    top: auto;
+    transform: none;
+    align-items: flex-end;
+    padding: 8px 16px;
+  }
+
+  .priceValue {
+    font-size: 28px;
+  }
+}

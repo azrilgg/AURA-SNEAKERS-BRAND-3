@@ -1,0 +1,200 @@
+.gallery {
+  padding: 100px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.galleryHeader {
+  text-align: center;
+  max-width: var(--container-max);
+  margin: 0 auto 60px;
+  padding: 0 60px;
+}
+
+.galleryTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.galleryTagLine {
+  width: 30px;
+  height: 1px;
+  background: var(--text-muted);
+}
+
+.galleryTitle {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.galleryTitleAccent {
+  background: linear-gradient(135deg, var(--club-primary), var(--club-accent, #DAA520));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gallerySubtitle {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+.playerCard {
+  position: relative;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.playerCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    transparent 30%,
+    rgba(var(--card-glow-rgb, 255, 255, 255), 0.15) 50%,
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--transition-smooth);
+}
+
+.playerCard:hover::before {
+  opacity: 1;
+}
+
+.playerCard:hover {
+  transform: translateY(-8px);
+  border-color: rgba(var(--card-glow-rgb, 255, 255, 255), 0.3);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(var(--card-glow-rgb, 255, 255, 255), 0.08);
+  background: var(--glass-bg-hover);
+}
+
+.playerNumber {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.04);
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  transition: color var(--transition-smooth);
+}
+
+.playerCard:hover .playerNumber {
+  color: rgba(var(--card-glow-rgb, 255, 255, 255), 0.1);
+}
+
+.playerAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--glass-bg), rgba(var(--card-glow-rgb, 255, 255, 255), 0.08));
+  border: 2px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: all var(--transition-smooth);
+}
+
+.playerCard:hover .playerAvatar {
+  border-color: rgba(var(--card-glow-rgb, 255, 255, 255), 0.4);
+  box-shadow: 0 0 30px rgba(var(--card-glow-rgb, 255, 255, 255), 0.15);
+}
+
+.playerName {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  transition: color var(--transition-smooth);
+}
+
+.playerCard:hover .playerName {
+  color: rgba(var(--card-glow-rgb, 255, 255, 255), 1);
+  text-shadow: 0 0 20px rgba(var(--card-glow-rgb, 255, 255, 255), 0.3);
+}
+
+.playerPosition {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.playerEra {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 992px) {
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 30px;
+  }
+  .galleryHeader {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+  }
+  .gallery {
+    padding: 60px 0;
+  }
+}
